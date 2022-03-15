@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>API Fun</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8"/>
+	<script type="text/javascript">
+		
+
+		function get() {
+			var request = new XMLHttpRequest;
+			console.log("Step 1 - request object created");
+			request.open("GET", "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=SEDG&apikey=XWK7O08W7UA1R7I7", true); 
+			console.log("Step 2 - opened request file"); 
+
+
+
+			request.onreadystatechange = function() {
+				console.log("Step 3 - readystatechange event fired."); 
+
+				if (request.readyState == 4 && request.status == 200) {
+					console.log("Step 5 - response received"); 
+					var result = request.responseText; 
+
+					info = JSON.parse(result);
+ 
+					symbol = info["Global Quote"]["01. symbol"];
+					open = info["Global Quote"]["02. open"];
+					high = info["Global Quote"]["03. high"]; 
+					low = info["Global Quote"]["04. low"];
+					price = info["Global Quote"]["05. price"]; 
+					volume = info["Global Quote"]["06. volume"];
+					date = info["Global Quote"]["07. latest trading day"];
+					close = info["Global Quote"]["08. previous close"];
+					change = info["Global Quote"]["09. change"];
+					percent = info["Global Quote"]["10. change percent"];
+
+
+					document.getElementById("data1").innerHTML = "SYMBOL: " + symbol;
+					document.getElementById("data2").innerHTML = "OPEN: " + open;
+					document.getElementById("data3").innerHTML = "HIGH: " + high; 
+					document.getElementById("data4").innerHTML = "LOW: " + low;
+					document.getElementById("data5").innerHTML = "PRICE: " + price; 
+					document.getElementById("data6").innerHTML = "VOLUME: " + volume; 
+					document.getElementById("data7").innerHTML = "LASTEST TRADING DAY: " + date;
+					document.getElementById("data8").innerHTML = "PREVIOUS CLOSE: " + close;
+					document.getElementById("data9").innerHTML = "CHANGE: " + change; 
+					document.getElementById("data10").innerHTML = "PERCENTAGE CHANGE: " + percent; 
+				}
+				else if (request.readyState == 4 && request.status != 200) {
+					document.getElementById("data").innerHTML = "ERROR: unable to read API!";
+				}
+			}
+			request.send(); 
+			console.log("Step 4 - request sent"); 
+
+		}
+
+	</script>
+
+</head>
+<body onload="get()">
+	<div class="content">
+		<h1>API Fun</h1>
+		<h3>Stock Choice: Solar Edge (SEDG)</h3>
+		<img src="sedg.png">
+	</div>
+	<div class="data">
+		<div id="data1"></div>
+		<div id="data2"></div>
+		<div id="data3"></div>
+		<div id="data4"></div>
+		<div id="data5"></div>
+		<div id="data6"></div>
+		<div id="data7"></div>
+		<div id="data8"></div>
+		<div id="data9"></div>
+		<div id="data10"></div>
+	</div>
+
+	<div class="content">
+		<h2>Describe the API you selected and what it does.</h2>
+		<p>The API I selected provides daily information of a stock.  It shows the 
+            symbol, open price, high price, low price, close price, volume,
+            latest trading day, previous close, change, and percentage change. </p>
+		<h2>Describe the options you used for the API request.</h2>
+		<p>For this API request, I used the "GET" request to process information
+             about a specific stock when it comes from the data base.</p>
+		<h2>Give two applications where this API could be helpful.</h2>
+		<p>This API could be helpful for personal or professional purposes.  Individual 
+            investors and professional investors refer to real time and historical stock data to make investing
+            decisions.  Stock APIs take complicated stock-related information and parse
+            it in a way that is readable to individuals and accurate enough to provide 
+            the basis for investing decisions.  For example, traders/investors might be 
+        creating a dashboard that allows them to visualize stock market data or they might 
+    be creating a trading algorithm that executes decisions based on real time stock data. </p>
+            
+		<h2>Cite the website where you found it.</h2>
+		<p>URL: <a href="https://www.alphavantage.co/documentation/">https://www.alphavantage.co/documentation/</p>
+	</div>
+</body>
+</html>

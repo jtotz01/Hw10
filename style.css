@@ -1,0 +1,25 @@
+.content {
+	font-family: Garamond; 
+	text-align: center; 
+	padding-right: 400px;
+	padding-left: 400px;  
+}
+
+.content .h2 {
+    padding-top: 30px;
+}
+
+.data {
+	font-family: "Courier New"; 
+	text-align: center; 
+	padding-right: 400px;
+	padding-left: 400px; 
+}
+
+img {
+	height: auto; 
+	width: 200px; 
+	padding-top: 20px; 
+	padding-bottom: 20px; 
+}
+
